@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #FFFDF8;
+    color: #3E000C;
+  }
+  /* Smooth scroll for the whole page */
+  html {
+    scroll-behavior: smooth;
+  }
+  /* Nicer focus-visible outlines */
+  *:focus-visible {
+    outline: 2px solid #C96E55;
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  /* Staggered card entrance — pass delay via inline style */
+  .animate-stagger {
+    animation: staggerIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  /* Page transition wrapper */
+  .page-transition {
+    animation: pageEnter 0.4s ease-out both;
+  }
+  /* Intro overlay */
+  .intro-overlay {
+    animation: introFade 0.6s ease-out 1.6s both;
+  }
+  /* Shimmer skeleton */
+  .shimmer-bg {
+    background: linear-gradient(90deg, #FFECD1 0%, #FFF9EF 50%, #FFECD1 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes staggerIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pageEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes introFade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .intro-overlay {
+    display: none !important;
+  }
+}
